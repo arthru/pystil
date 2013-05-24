@@ -1,1 +1,8 @@
 -e git+https://github.com/Kozea/log_colorizer.git#egg=log_colorizer
+flask
+flask-sqlalchemy==0.15
+CSStyle
+pika
+gevent
+pygeoip
+psycopg2
