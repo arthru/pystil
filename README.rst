@@ -47,6 +47,9 @@ Options
 --help
   show this help information
 
+--address
+  Pystil address to answer on
+
 --port
   Pystil port (default 1789)
 

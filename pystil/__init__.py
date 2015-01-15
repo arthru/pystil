@@ -10,6 +10,7 @@ from tornado.options import define
 
 
 define("port", default="1789", help="Pystil port")
+define("address", default="localhost", help="Pystil address to answer on")
 define("db_host", default="localhost", help="Pystil db host")
 define("db_name", default="pystil", help="Pystil db name")
 define("db_user", default="pystil", help="Pystil db user")
