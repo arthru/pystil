@@ -55,3 +55,6 @@ Options
 
 --secret
   Cookie secret (default REPLACE_ME)
+
+--log_conffile
+  Path to an INI log configuration file (see the `configuration fileformat doc <https://docs.python.org/3.4/library/logging.config.html#logging-config-fileformat>`_ ; default None)
