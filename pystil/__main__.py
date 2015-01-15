@@ -4,11 +4,13 @@
 # This file is part of pystil, licensed under a 3-clause BSD license.
 
 from tornado.ioloop import IOLoop
-from tornado.options import options, parse_command_line
+from tornado.options import options, parse_command_line, parse_config_file
 from subprocess import call
 
 import pystil
 parse_command_line()
+if options.conffile:
+    parse_config_file(options.conffile)
 
 import pystil.routes
 import pystil.charts
