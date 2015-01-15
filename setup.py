@@ -43,6 +43,9 @@ options = dict(
         "Intended Audience :: Public",
         "License :: OSI Approved :: BSD License",
         "Operating System :: Linux",
-        "Programming Language :: Python :: 3.3"])
+        "Programming Language :: Python :: 3.3",
+        "Programming Language :: Python :: 3.4",
+    ]
+)
 
 setup(**options)
