@@ -2,4 +2,4 @@
 __pycache__
 pystil.egg-info
 venv
-geoip/*.csv
+sql/geoip/*.csv

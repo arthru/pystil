@@ -1,9 +1,6 @@
-\connect pystil pystil
 drop schema if exists geoip cascade;
 create schema geoip;
-\connect pystil postgres
 create extension if not exists ip4r;
-\connect pystil pystil
 
 CREATE TABLE geoip.country (
     ipr iprange NOT NULL,
@@ -131,14 +128,12 @@ insert into geoip.asn
        from geoip_asn_tmp;
 
 CREATE TEMPORARY TABLE geoip_asn_v6_tmp (
+    name        VARCHAR        NOT NULL,
     begin_str_ip     VARCHAR         NOT NULL,
     end_str_ip      VARCHAR         NOT NULL,
-    begin_ip    VARCHAR      NOT NULL,
-    end_ip      VARCHAR      NOT NULL,
-    name        VARCHAR        NOT NULL
+    unknown VARCHAR      NOT NULL
 );
-
-\copy geoip_asn_v6_tmp from 'GeoIPASNumv6-2.csv' with csv delimiter ',' null '' quote '"' encoding 'ISO-8859-2';
+\copy geoip_asn_v6_tmp from 'GeoIPASNum2v6.csv' with csv delimiter ',' null '' quote '"' encoding 'ISO-8859-2';
 
 insert into geoip.asn
        select (trim(begin_str_ip) || '-' || trim(end_str_ip))::iprange,
