@@ -11,7 +11,7 @@ from tornado.web import (
     url as unnamed_url)
 
 import logging
-from logging.handlers import SysLogHandler, SMTPHandler
+import logging.config
 from uuid import uuid4
 from tornado.options import options
 from logging import getLogger
@@ -71,30 +71,11 @@ class Pystil(Application):
         self.db_metadata = metadata
         self.db = scoped_session(sessionmaker(bind=self.db_engine))
         Tracking(self.db_engine.connect(), self.log).start()
-        if not options.debug:
-            handler = SysLogHandler(
-                address='/dev/log', facility=SysLogHandler.LOG_LOCAL1)
-            handler.setLevel(logging.INFO)
-            handler.setFormatter(
-                logging.Formatter(
-                    'PYSTIL: %(name)s: %(levelname)s %(message)s'))
 
-            smtp_handler = SMTPHandler(
-                'smtp.keleos.fr',
-                'no-reply@pystil.org',
-                'pystil-errors@kozea.fr',
-                'Pystil Exception')
-            smtp_handler.setLevel(logging.ERROR)
+        if options.log_conffile:
+            logging.config.fileConfig(options.log_conffile)
 
-            log.addHandler(smtp_handler)
-            for logger in (
-                    'tornado.access',
-                    'tornado.application',
-                    'tornado.general',
-                    'sqlalchemy'):
-                getLogger(logger).addHandler(handler)
-                getLogger(logger).addHandler(smtp_handler)
-        else:
+        if options.debug:
             self.log.setLevel(logging.DEBUG)
             try:
                 from wdb.ext import wdb_tornado, add_w_builtin
@@ -103,8 +84,6 @@ class Pystil(Application):
             else:
                 wdb_tornado(self, start_disabled=True)
                 add_w_builtin()
-
-            #getLogger('sqlalchemy').setLevel(logging.DEBUG)
 
     @property
     def log(self):
