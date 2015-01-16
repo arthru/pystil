@@ -21,3 +21,5 @@ define("protocol", default='http', help="Protocol if behind proxy")
 define("secret", default='REPLACE_ME', help="Cookie secret")
 define("log_conffile", default=None, help="Logging configuration file")
 define("conffile", default=None, help="Pystil configuration file")
+define("self_pystil", default=True,
+       help="Flag to tell if pystil shoud collect data about itself")
