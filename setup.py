@@ -24,7 +24,6 @@ options = dict(
     license="BSD",
     platforms="Any",
     packages=find_packages(),
-    scripts=["pystil2.py"],
     package_data={
         'pystil': ['static/*.js',
                    'static/*.gif',
