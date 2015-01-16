@@ -8,7 +8,7 @@ from pystil.context import Hdr, url, MESSAGE_QUEUE
 from pystil.utils import on, in_last_month
 from tornado.web import asynchronous, HTTPError
 from sqlalchemy import desc, func
-from datetime import date, timedelta, datetime
+from datetime import date, timedelta
 
 import os
 import uuid
@@ -29,11 +29,12 @@ class PystilJs(Hdr):
     def get(self):
         self.set_header("Content-Type", 'application/javascript')
         js = os.path.join(
-            self.application.settings['static_path'],
-            'js', 'tracker.js')
+            self.application.settings['static_path'], 'js', 'tracker.js'
+        )
         base_url = '%s://%s/' % (
             self.application.settings.get('protocol', self.request.protocol),
-            self.request.host)
+            self.request.headers.get('X-Forwarded-Host', self.request.host)
+        )
         with open(js) as js_file:
             self.write(js_file.read() % (base_url, str(uuid.uuid4())))
 
