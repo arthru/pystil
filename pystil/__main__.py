@@ -17,8 +17,7 @@ import pystil.charts
 import pystil.websocket
 from pystil.context import pystil
 
-#pystil.listen(options.port, address="localhost", xheaders=True)
-pystil.listen(options.port, address="127.0.0.1", xheaders=True)
+pystil.listen(options.port, address=options.address, xheaders=True)
 if options.debug:
     try:
         call("wsreload --url 'http://l:1789/*'", shell=True)

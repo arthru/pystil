@@ -5,6 +5,7 @@ db_password = "pystil"
 db_name = "pystil"
 
 debug = False
+address = ''
 port = '1789'
 protocol = 'http'
 secret = "REPLACE_ME"
