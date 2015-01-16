@@ -11,7 +11,6 @@ from tornado.web import (
     url as unnamed_url)
 
 import logging
-import logging.config
 from uuid import uuid4
 from tornado.options import options
 from logging import getLogger
@@ -71,9 +70,6 @@ class Pystil(Application):
         self.db_metadata = metadata
         self.db = scoped_session(sessionmaker(bind=self.db_engine))
         Tracking(self.db_engine.connect(), self.log).start()
-
-        if options.log_conffile:
-            logging.config.fileConfig(options.log_conffile)
 
         if options.debug:
             self.log.setLevel(logging.DEBUG)

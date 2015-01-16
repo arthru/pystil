@@ -6,11 +6,16 @@
 from tornado.ioloop import IOLoop
 from tornado.options import options, parse_command_line, parse_config_file
 from subprocess import call
+import logging.config
 
 import pystil
 parse_command_line()
 if options.conffile:
     parse_config_file(options.conffile)
+if options.log_conffile:
+    options.logging = None
+    logging.config.fileConfig(options.log_conffile)
+
 
 import pystil.routes
 import pystil.charts

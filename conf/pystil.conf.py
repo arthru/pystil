@@ -10,3 +10,4 @@ port = '1789'
 protocol = 'http'
 secret = "REPLACE_ME"
 log_conffile = None
+self_pystil=True
