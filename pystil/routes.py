@@ -31,8 +31,7 @@ class PystilJs(Hdr):
         js = os.path.join(
             self.application.settings['static_path'], 'js', 'tracker.js'
         )
-        base_url = '%s://%s/' % (
-            self.application.settings.get('protocol', self.request.protocol),
+        base_url = '//%s/' % (
             self.request.headers.get('X-Forwarded-Host', self.request.host)
         )
         with open(js) as js_file:
